@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .row {
+      column-count: 2;
+    }
+
+    #legend {
+      margin: 30px 0px 50px;
+    }
+
+    #legend svg {
+      margin: 0 auto;
+    }
+
+    .svg-tooltip {
+      background: rgba(69, 77, 93, .9);
+      border-radius: 5px;
+      color: #fff;
+      display: block;
+      font-size: 12px;
+      line-height: 16px;
+      text-transform: none;
+      max-width: 320px;
+      padding: 1rem;
+      position: absolute;
+      text-overflow: ellipsis;
+      white-space: pre;
+      z-index: 300;
+      visibility: hidden;
+    }
+    
+    .chart, .chart p, .chart span {
+      width: 100%;
+      font-size: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id = heading> 
+    <<h1 id="heading">Facts vs Feelings</h1>
+    <h2>Connecting perceptions of Crime in chicago to actual crime in chicago, and related net migration outflows</h2>
+    <h3>By Stefan Manuel</h3>
+  
+  </div>
+  <div class="container">
+    <h3></h3>
+    <p>
+      Chicago is often hampered by the reputation of being a den of crime and misery, a reputation for being on the most dangerous cities in the world despite not 
+      even cracking the top <a href="https://worldpopulationreview.com/us-city-rankings/most-violent-cities-in-america">20 most dangerous cities in the US</a> . In this project I sought to answer both whether the perception of Chicago as being crime ridden has a basis in reality
+      and whether that perception was contributing to Chicago's net migration outflow over the past few decades
+    </p>
+  </div>
+  <div class="container" id="Map">
+    <h1>Chicago Crime by Year and Community Area</h1>
+    <p>
+        
+        Crime data sourced from 
+        <a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2/data">
+        Chicago Data Portal</a>.
+        Map built using <a href="https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Community-Areas-current-/cauq-8yn6">
+        Chicago Data GeoJSON</a> with <a href="https://mapshaper.org/">
+        mapshaper.</a>
+        Population counts from latest census number as posted
+        on <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">
+          Wikipedia</a>.
+
+
+        
+          <label>
+            Year:
+            <select>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
+              <option value="2015">2015</option>
+              <option value="2014">2014</option>
+              <option value="2013">2013</option>
+              <option value="2012">2012</option>
+              <option value="2011">2011</option>
+              <option value="2010">2010</option>
+              <option value="2009">2009</option>
+              <option value="2008">2008</option>
+              <option value="2007">2007</option>
+
+              
+            </select>
+             </label>
+        
+    </p>
+    <div id="legend"></div>
+    <div id="row1" class="row"></div>
+    <div id="row2" class="row"></div>
+    <div id="chart1"></div>
+    <div> <p>The differences in crime numbers from the dawn of the century to current day is incredible. Even with the spike in crime that happened during Covid,
+      the numbers are clearly going down. So is there any truth to perceptions that crime is on the rise? A little bit, while violent crime on a whole is treding down, there is a distinct 
+      uptrend is homicide and shooting crimes. This trend is not unique to Chicago, but it does perhaps explain why Chicago crime is so sensationalized. Normal violent crimes like robberies don't 
+      capture peoples' attention the same way gang shootings or homicides do. 
+    </p></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="libs/d3-color-legend.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="final_project.js"></script>
+
+<div class="container">
+  <h1>Chicago crime by involvement of firearm (excludes homicides)</h1>
+  <p>
+    Crime data sourced from 
+    <a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2/data">
+    Chicago Data Portal</a>.
+    
+  </p>
+  <label>
+    Year:
+    <select>
+      <option value="2022">2022</option>
+      <option value="2021">2021</option>
+      <option value="2020">2020</option>
+      <option value="2019">2019</option>
+      <option value="2018">2018</option>
+      <option value="2017">2017</option>
+      <option value="2016">2016</option>
+      <option value="2015">2015</option>
+      <option value="2014">2014</option>
+      <option value="2013">2013</option>
+      <option value="2012">2012</option>
+      <option value="2011">2011</option>
+      <option value="2010">2010</option>
+      <option value="2009">2009</option>
+      <option value="2008">2008</option>
+      <option value="2007">2007</option>
+
+      
+    </select>
+     </label>
+  <div id="legend"></div>
+  <div id="chart4"></div>
+<script src="final_project_3.js"></script>
+<p>While the absolute number of crimes is still faling, the proportion of gun crimes continues to increase. Thus in one sense Chicago has become slightly less safe becasue while one would be less likely 
+  to be a victim of crime, there is a higher chance for the criminal to be using a firearm which would make the encounter more dangerous. But there is also the caveat that much crime in Chicago is localized to particular neighborhoods, 
+  and targeted. While this does make Chicago as a whole less safe, it still means the chance of running into an armed criminal is lower than the data would suggest for most of the population.
+</p>
+</div>
+
+<div class="container">
+  <h1>Migration rates to Chicago compared with crime rate and median house price </h1>
+  <p>
+    Crime data sourced from 
+    <a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2/data">
+    Chicago Data Portal</a>.
+    Migration and Housing data sourced from <a href="https://usa.ipums.org/usa/index.shtml">The US Census Bureau ACS tabulated by IPUMS </a>
+  </p>
+  <div id="legend"></div>
+  <div id="chart2"></div>
+</div>
+<script src="final_project_1.js"></script>
+
+
+<p> People generally leave an area for one of two reasons, cost of living or fears over safety. As both crime and housing cost went down in the wake of the 2008 Financial Crisis,
+  Chicago's net outflows of people (purely who is moving in or out, not deaths and births) briefly decreased. Yet crime has been consistantly going down over the past decade,
+  although the rate of that decrease plateaued around 2014. Meanwhile the net migrant outflow only increased when housing prices were going down and crime was going down, which is 
+  completely against what we'd expect to happen when crime and cost of living fall which is more people moving in. There can't be a real disconnect between the facts and perceptions of housing costs, which is concrete. 
+  So the misconcepntions which is causing Chicago to lose people is the perception of high crime, fueled by sensationalized media. 
+</p>
+</div>
+
+<div class="container">
+  <h1>Number of Fox news articles about city per million people</h1>
+  <p>
+      Data on population comes from ACS 1-year surverys
+      The Fox news article data was scraped from the website <a href="https://www.foxnews.com/">Fox News</a>.
+  </p>
+  <div id="legend"></div>
+  <div id="chart3"></div>
+<script src="final_project_2.js"></script>
+</div>
+<p>While I didn't read every single article which would have clarified whether these were positive or negative articles, since it's Fox I think it's fair to say they are almost all negative.
+  All else being equal, we would expect the number of articles written about a city by a national news organization to be propotional to the number of people living there.
+  There are exceptions, like when the national news org is based there like the New York Times, but beyond that writing more about a certain city is indicative of a certain bias to or against said city. Since Fox certainly doesn't secretly carry a torch for Chicago,
+  it's fair to say they have a major axe to grind with the city. While some machine learning to actually demonstrate malice from Fox News towards Chicago would be ideal, without that
+  just by the sheer volume Fox and similar news orgs write about Chicago crime it creates and inflated perception of crime. After all, hearing a report on how many shootings there were over a weekend
+  creates a far more lasting impression than the eventual news release that violent crime is once again down in Chicago. If all you read was Fox you would probably be inclined to distrust the government for even saying crime was </p>
+
+
+  <h1>Conclusion and Process</h1>
+  <p> For me, this project taught me a lot about how hard it is for data to change peoples feelings, especially when it comes to fear. The often used example of 
+    how people are irrational is people's preferences for driving over flying, people tend to think driving is safer than flying in a plane but statistically planes are much, much safer than getting in a car.
+  One aspect of this might be a matter of control, a car might be more dangerous but at least you (feel like you) control your own fate. Planes, much like taking a walk through a city in putting your fate into other people's hands. 
+  The other major contributing feeling is the fear of the unknown, it's the same fear that causes people to take risks like driving and makes people walk faster and act cautiously in a new neighborhood.
+   For policymakers the fear of the unknown is that we still don't know why crime has been consistantly falling, only that when it looks like crime might tick up just a little bit people start to go crazy. </p>
+
+
+
+ <p>   Crime in Chicago is no different. Chicago definitely earned its reputation as a hotbed of crime from the prohibition era and the 80's, but even when crime as low as its been in decades it's still the number one issue on many peoples minds. 
+    The reasons for this are probably twofold, one is that people don't notice it as much when non-violent crimes or property crimes go down, but the second is definitely the sensationalation of Chicago's violence is a lot of media.
+     And it isn't just the news outlets that have a bone to pick with Chicago, sensational sells, and the more outrageious the story the more clicks and ad revenue it will get. Crime will probably go up again in the near future, it has a tendency to do that. But I hope that if if sensational mmedia reports about violence
+     can do anything for society it will be to desensitize us to when crime actually does increase and Chicago won't get hollowed out like it was in the past but remain a great city.
+ </p>
+
+ <p>This project for me was a lesson in managing expectations. I had started with grand ambitions of doing a similar study of crime but for the entire United States. All I got was massive yet incomplete datasets which I couldn't even clean
+  because they were so large my computer kept crashing. Necessity forced me to focus on my adopted home of Chicago, where the datasets were still massive and it would take minutes to run anything on them, but at least they would run. Moreover teh data limited the kind of story I could tell.
+   I had wanted to tell a story that would also include race and immigration, and I even found the perfect dataset for it but was only avaliable as an 80 page pdf and the prospect of making it into a csv kept me up at night.
+   So I had to give up on that avenue, and as I started doing my preliminary research into Chicago crime I was constantly floored by just how <i>low</i> it was compared to the reputation and media reports. Fox news really does make it sound like Chicago is a constant warzone.
+   This led me into the sensationalation question, which I think is the most interesting but also most difficult aspect to put into data visualizations. I did try to get an ML model for analyzing the sentiment, not just the number of articles about Chicago. But progress was slow and I eventually had to give up on it. 
+ </p>
+ <p>In the end, I used 3 main data sources. Chicago crime data from the Chicago crime portal, ACS for demographic data, and a scraper from an API to get fox news articles. Getting the first two datasets were quite simple thanks to the data explorer by the city of chicago and the IPUMS website which lets you quickly get selections from a variety of microdata. 
+  The only real problem was the scraper, which kept either crashing or getting blocked because Fox thought I was running a DDOS attack. In the end I only scraped 130k articles going back a few years after running the scraper for over 2 days (and having to constatnly restart it). Since it took so long I was unable to make the ML model in time, which I might do at somepoint on my own time to 
+  make sure I'm not completely slandering Fox.
+ </p>
+<p>Since the data I had wound up being relatively simple, with the exception of chicago geographical data which needed a bubble map, I decdied to go with simple charts and line graphs with plain colors
+  so as to not sensationalize a project partialy on sensational media.  </p>
+
+  <h2>Sources</h2>
+  <h3>Fox Scraper <a href="https://console.apify.com">The API</a> and <a href="https://www.foxnews.com/">the article source</a> </h3>
+  <h3>Tiffany France d3 <a href="https://github.com/tiffanyfrance/CAPP30239_FA22/tree/main/">Code</a> </h3>
+
+  <h3>IPUMS  <a href="https://usa.ipums.org/usa/">ACS</a></h3>
+</body>
+
+</html>
